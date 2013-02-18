@@ -1,0 +1,226 @@
+p{
+	font-family: impact, sans-serif;
+	color: #00146e;
+	font-size: 50px;
+	letter-spacing: 0.6pt;
+	word-spacing: 0pt;
+	line-height: 1.1;
+}
+
+.head{
+	display: block;
+	height:  500px;
+	width: 800px;
+	color: #00146e;
+	position: absolute;
+	top: 0em;
+	right: .5em;
+	font-variant: normal;
+	text-align: left;
+}
+
+.body1{
+	font-size: 19px;
+	display: block;
+	height: 100px;
+	width: 750px;
+	position: absolute;
+	top: 10em;
+	right: 3.8em;
+	text-align: justify;
+}
+
+.body2{
+	font-size: 19px;
+	display: block;
+	height: 100px;
+	width: 750px;
+	position: absolute;
+	top: 12em;
+	right: 3.8em;
+	text-align: justify;
+}
+
+.body3{
+	font-size: 19px;
+	display: block;
+	height: 100px;
+	width: 750px;
+	position: absolute;
+	top: 21em;
+	right: 3.8em;
+	text-align: justify;
+}
+
+.body4{
+	font-size: 19px;
+	display: block;
+	height: 100px;
+	width: 750px;
+	position: absolute;
+	top: 17em;
+	right: 3.8em;
+	text-align: justify;
+}
+
+img.myimage {
+	position: absolute;
+	top: 2em;
+	left: 5em;
+	z-index: -3;
+}
+
+img.name{
+	height:  45%;
+	width:  45%;
+	position: fixed;
+	right: 9em;
+	top: 3em;
+}
+
+img.thisisme{
+	position: absolute;
+	right:  8em;
+	bottom:  8em;
+}
+
+.twitterButton{
+	position: absolute;
+	right: 3em;
+	bottom: .25em;
+	display: block;
+	width: 50px;
+	height: 50px;
+	background: url("../images/twitter.png") bottom;
+	text-indent:  -99999 px;
+}
+
+.twitterButton:hover{
+	background-position: 0 0;
+}
+
+.githubButton{
+	position: absolute;
+	right: 7em;
+	bottom: .25em;
+	display: block;
+	width: 50px;
+	height: 50px;
+	background: url("../images/githubButton.png") bottom;
+	text-indent:  -99999 px;
+}
+
+.githubButton:hover{
+	background-position: 0 0;
+}
+
+.linkedinButton{
+	position: absolute;
+	right: 11em;
+	bottom: .25em;
+	display: block;
+	width: 50px;
+	height: 50px;
+	background: url("../images/linkedinButton.png") bottom;
+	text-indent:  -99999 px;
+}
+
+.linkedinButton:hover{
+	background-position: 0 0;
+}
+
+.emailButton{
+	position: absolute;
+	right: 15em;
+	bottom: .25em;
+	display: block;
+	width: 50px;
+	height: 50px;
+	background: url("../images/emailButton.png") bottom;
+	text-indent:  -99999 px;
+}
+
+.emailButton:hover{
+	background-position: 0 0;
+}
+
+img.contact{
+	position: absolute;
+	right: 19.5em;
+	bottom: 1.15em;
+}
+
+.aboutmeButton{
+	position: absolute;
+	left: 19em;
+	bottom: 1em;
+	display: block;
+	width: 174px;
+	height: 33px;
+	background: url("../images/aboutmeButton.png") bottom;
+	text-indent:  -99999 px;
+}
+
+.aboutmeButton:hover{
+	background-position:0 0;
+}
+
+.myworkButton{
+	position: absolute;
+	left: 36em;
+	bottom: .45em;
+	display: block;
+	width: 157px;
+	height: 42px;
+	background: url("../images/myworkbutton.png") bottom;
+	text-indent:  -99999 px;
+}
+
+.myworkButton:hover{
+	background-position: 0 0;
+}
+
+.homeButton{
+	position: absolute;
+	left: 7em;
+	bottom: .95em;
+	display: block;
+	width: 102px;
+	height: 32.5px;
+	background: url("../images/homeButton.png") bottom;
+	text-indent:  -99999 px;
+}
+
+.homeButton:hover{
+	background-position:  0 0;
+}
+
+
+body{
+	background: url("../images/background2.JPG");
+}
+
+#navigation{
+    background-color: #03092d;
+    height: 60px;
+    width: 100%;
+    position: fixed;
+    bottom: 0em;
+    padding-bottom: 0;
+    border-radius:  0px;
+    left:  0em;
+}
+
+#navigation2{
+	margin: 0 auto;
+	border-left: solid 1px #f6e9bf;
+}
+
+#navigation2 ul
+{
+    font: normal 20px Arial;
+    list-style-type: none;
+    float:left;
+    padding:0;
+    margin:0;
+}
