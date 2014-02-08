@@ -124,7 +124,7 @@ a{
 
 .portfolio_image{
 	width:100%;
-	height: 200px;
+	height: 15%;
 	padding-bottom: 10px;
 }
 
@@ -176,6 +176,9 @@ a{
 	}
 	.header .links_block .link{
 		font-size: 1.3em;
+	}
+	.portfolio_image{
+		height: 10%;
 	}
 }
 
@@ -239,5 +242,8 @@ a{
 	}
 	.link{
 		font-size: 3em;
+	}
+	.portfolio_image{
+		height:15%;
 	}
 }
