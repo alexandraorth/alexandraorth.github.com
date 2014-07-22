@@ -1,3 +1,5 @@
+/*TEXT/GENERAL CSS*/
+
 .container {
 	font-family: 'PT Sans', Helvetica, sans-serif;
 	max-width: 640px;
@@ -11,6 +13,21 @@
 p#intro {
 	font-size: 1.2em;
 }
+p.header{
+	font-size: 1.6em;
+	font-weight: 600;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+p.superheader{
+	margin-bottom: 0;
+}
+p.textlink{
+	margin-top: 0;
+}
+p.description{
+	margin-bottom: 5px;
+}
 img{
 	max-width: 100%;
 }
@@ -18,9 +35,30 @@ a{
 	color: #8AAB21;
 	text-decoration: none;
 }
+a.code {
+	margin-right: 2px;
+	padding-right: .5em;
+	border-right: 1px solid #8AAB21;
+}
+
+a.demo {
+	margin-left: 2px;
+	padding-left: .5em;
+	border-left: 1px solid #8AAB21;
+}
 .link{
 	text-align: center
 }
+svg{
+	padding-top: .5em;
+	padding-bottom: .5em;
+	margin-right: auto;
+	margin-left: auto;
+	display: block;
+}
+
+/* ICON CSS */
+
 #icons{
 	text-align: center
 }
@@ -31,4 +69,27 @@ a{
 }
 .icon:hover{
 	background-color: #8AAB21;
+}
+
+.ss-style-dots::before {
+	bottom: 20px;
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+	background: #2072a7;
+	box-shadow: 30px 0 #2072a7, -30px 0 #2072a7;
+}
+/* Double Line */
+.ss-style-doubleline::before {
+	bottom: 30px;
+	width: 140px;
+	height: 2px;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+	background: #2072a7;
+	box-shadow: 0 30px 0 #2072a7;
 }
