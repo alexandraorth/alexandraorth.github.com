@@ -1,0 +1,120 @@
+body{
+	margin: 0;
+	font: 14px sans-serif;
+}
+
+nav{
+	height: 50px;
+	width: 100%;
+	display: block;
+	background: #3E606F;
+	border-bottom: 2px solid #193441;  
+}
+
+nav > ul,
+nav > ul > li {
+	float: left;
+}
+
+nav > ul > li > a {
+ 	padding: 17px;
+ 	font-size: 16px;
+ 	letter-spacing: 1px;
+ 	text-decoration: none;
+ 	color: #dddddd;
+ 	font-weight: 700;
+ 	text-transform: uppercase;
+ 	-webkit-transition: color .25s ease;
+ 	-moz-transition: color .25s ease;
+ 	transition: color .25s ease;  
+}
+
+nav ul#secondaryList > li > a:hover, 
+nav ul#secondaryList > li > a:active {  
+    background-color: #476E7F;  
+}   
+
+nav ul#dropdownList{
+	display: none;
+} 
+
+nav ul#dropdownList > li {
+	list-style: none;
+	background: #193441;
+	display: block;
+	padding: 16px;
+}
+
+nav ul#dropdownList > li > a{
+ 	padding: 17px;
+ 	font-size: 10px;
+ 	letter-spacing: 1px;
+ 	text-decoration: none;
+ 	color: #dddddd;
+ 	font-weight: 700;
+ 	text-transform: uppercase;
+ 	-webkit-transition: color .25s ease;
+ 	-moz-transition: color .25s ease;
+ 	transition: color .25s ease;  
+} 
+
+@media (max-width : 810px){
+	/*Make dropdown links appear inline*/
+	ul#secondaryList {
+		position: static;
+		display: none;
+	}
+	/*Create vertical spacing*/
+	li {
+		margin-bottom: 1px;
+	}
+	/*Make all menu links full width*/
+	ul#secondaryList li, li a {
+		width: 100%;
+	}
+
+	nav ul#mainList li:hover > ul{
+		display: block;
+		position: absolute;
+		top: 50px;
+		left: 0;
+		width: 200px;
+		opacity: 1;
+		visibility: visible;
+	}
+
+	nav ul#mainList li ul li:hover { 
+		background: #476E7F; 
+	}
+}
+
+
+#svgContainer{
+	display: block;
+	text-align: center;
+	padding-top: 40px;
+}
+
+svg{
+	vertical-align: middle
+}
+
+svg:first-child {
+	padding-right: 40px;
+}
+
+.segment-highlight{
+	stroke: black;
+	stroke-width: 2px;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+
+
+

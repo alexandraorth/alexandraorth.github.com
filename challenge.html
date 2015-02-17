@@ -1,0 +1,227 @@
+<html>
+	<head>
+		<title>Onto It Web Challange</title>
+		<link rel="stylesheet" href="/challenge.css">
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	</head>
+	
+	<body>
+		<nav>
+			<ul id="mainList">
+				<li><a href='#'>Home</a>
+					<ul id="dropdownList">
+						<li><a class="randomizeLink" href='#'>Randomize Data</a></li>
+						<li><a href='#'>Button</a></li>
+						<li><a href='#'>Button</a></li>
+						<li><a href='http://www.bostonglobe.com/metro/2015/02/15/meteorologist-pumped-over-thundersnow/GCbvYsQ0rLKwisWGIfZxtM/story.html'>Weatherman Video</a></li>
+					</ul>
+				</li>
+			</ul>
+			<ul id="secondaryList">
+				<li><a class="randomizeLink" href='#'>Randomize Data</a></li>
+				<li><a href='#'>Button</a></li>
+				<li><a href='#'>Button</a></li>
+				<li><a href='http://www.bostonglobe.com/metro/2015/02/15/meteorologist-pumped-over-thundersnow/GCbvYsQ0rLKwisWGIfZxtM/story.html'>Weatherman Video</a></li>
+			</ul>
+		</nav>
+
+		<div id="svgContainer"></div>
+	</body>
+
+	<script type="text/javascript">
+
+		$(".randomizeLink").click(function(){
+			changeData();
+		});
+
+	</script>
+
+	<script type="text/javascript">
+		var countries = ["US","China","Japan",
+			"Germany","France","UK",
+			"Brazil","Italy","Russia","India"];
+
+		var width = 400,
+			height = 400,
+			barHeight = 200,
+			barWidth = 500,
+			radius = Math.min(width, height) / 2,
+			color = d3.scale.category20b();
+
+		//generate random data		
+		var data = getRandomData();
+
+		/* ===========
+			BAR CHART
+		   =========== */
+		var graphData = getGraphData(data);
+
+		var x = d3.scale.ordinal()
+		    .rangeRoundBands([0, barWidth], .1)
+		    .domain(graphData.map(function(d) { return d.country; }));
+
+		var y = d3.scale.linear()
+		    .range([barHeight, 0])
+		    .domain([0, d3.max(graphData, function(d){return d.freq})]);
+
+		var xAxis = d3.svg.axis()
+		    .scale(x)
+		    .orient("bottom");
+
+		var chart = d3.select("#svgContainer").append("svg")
+			.attr("width", barWidth)
+			.attr("height", barHeight + 40)
+			.attr("class","chart");
+
+		chart.append("g")
+			.attr("class", "x axis")
+		    .attr("transform", "translate(0," + barHeight + ")")
+		    .call(xAxis);
+
+	    var barWidth = barWidth / graphData.length;
+
+	    var bar = chart.selectAll(".bar")
+		    .data(graphData)
+	   		.enter().append("rect")
+			.attr("y", function(d) { return y(d.freq); })
+			.attr("height", function(d) {  return barHeight - y(d.freq); })
+			.attr("transform", function(d, i) {return "translate(" + i * barWidth + ",0)"; })
+			.attr("width", barWidth - 1)
+			.attr("fill", "lightgray");
+
+		/* ===========
+			PIE CHART
+		   =========== */
+		var arc = d3.svg.arc()
+		    .outerRadius(radius - 10)
+		    .innerRadius(0);
+
+		var pie = d3.layout.pie()
+			.sort(null)
+			.value(function(d) { return d.visitors; });
+		
+		var piesvg = d3.select("#svgContainer").append("svg")
+			.attr("width", width)
+			.attr("height", height)
+			.append("g")
+			.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+		var g = piesvg.datum(data)
+			.selectAll(".arc")
+			.data(pie).enter()
+
+		g.append("path")
+			.attr("fill", function(d, i) { return color(i); })
+			.attr("d", arc)
+			.each(function(d) { this._current = d; }) // store the initial angles
+			.on('mouseout', function(d){
+				unTransition(d.data.month);
+				d3.select(this).attr('class', 'segment')
+			})
+			.on('mouseenter', function(d){
+				d3.select(this).attr('class', 'segment-highlight')
+				transition(d.data, this.getAttribute("fill"));
+			
+			});
+
+		g.append("text")
+			.attr("transform", function(d) { 
+				return "translate(" + arc.centroid(d)[0]*1.6 + "," + arc.centroid(d)[1]*1.6 + ")"; })
+			.attr("dy", ".35em")
+			.style("text-anchor", "middle")
+			.text(function(d) {return d.data.month; })
+			
+
+		function transition(data, color) {
+			month = data.month;
+			data = countries.map(function(d){ 
+		        return {country:d, freq: data.countries[d]}; 
+		    });  
+
+			y.range([barHeight, 0])
+				.domain([0, d3.max(graphData, function(d){return d.freq})]);
+
+			chart.selectAll('.h')
+				.data(data)
+				.enter().append("rect")
+				.attr('class', month)
+				.attr('fill', color)
+				.attr("transform", function(d, i) {return "translate(" + i * barWidth + ",0)"; })
+				.transition()
+				.duration(500)
+		    	.attr("y", function(d) {return y(d.freq); })
+		    	.attr("height", function(d) { return barHeight - y(d.freq); })
+		    	.attr("width", barWidth - 1)
+		}
+
+		function unTransition(month){
+			chart.selectAll("." + month).remove()
+		}
+
+		function getRandomData(){
+			var months = ['January','Febuary', 'March', 'April',
+						'May', 'June', 'July', 'August',
+						'September', 'October', 'November', 'December']
+
+			data = [];
+			for (var i in months) {
+				var obj = {};
+				obj['month'] = months[i];
+				sum = 0;
+
+				counts = {};
+				for( var c in countries){
+					counts[countries[c]] =  Math.floor(Math.random() * 20000); 
+					sum += counts[countries[c]]
+				}
+				obj['countries'] = counts;
+				obj['visitors'] = sum;
+				data.push(obj);
+			}
+			return data
+		}
+
+		function getGraphData(data){
+			return countries.map(function(d){ 
+		        return {country:d, freq: d3.sum(data.map(function(t){ return t.countries[d]}))}; 
+		    });  
+		}
+
+		function changeData(){
+			data = getRandomData();
+			graphData = getGraphData(data);
+
+			//update pie chart
+			piesvg.selectAll("path")
+				.data(pie(data))
+				.transition().duration(750)
+				.attrTween("d", arcTween);
+
+			piesvg.selectAll("text")
+				.data(pie(data))
+				.transition().duration(750)
+				.text(function(d) {return d.data.month; })
+				.attr("transform", function(d) { 
+					return "translate(" + arc.centroid(d)[0]*1.6 + "," + arc.centroid(d)[1]*1.6 + ")"; 
+				});
+
+			//update graph
+			y.domain([0, d3.max(graphData, function(d) { return d.freq; })]);
+		
+			chart.selectAll("rect").data(graphData)
+				.transition().duration(500)
+                .attr("y", function(d) {return y(d.freq); })
+                .attr("height", function(d) { return barHeight - y(d.freq); })
+                .attr("transform", function(d, i) {return "translate(" + i * barWidth + ",0)"; })
+                .attr("fill", "lightgray");
+
+		}
+
+		function arcTween(d) {
+		  var i = d3.interpolate(this._current, d);
+		  this._current = i(0);
+		  return function(t) { return arc(i(t)); };
+		}
+	</script>
+</html>
